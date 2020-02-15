@@ -10,10 +10,11 @@ import json
 
 # Grab the Bot OAuth token from the environment.
 BOT_TOKEN = os.environ["BOT_TOKEN"]
-
 # Define the URL of the targeted Slack API resource.
 # We'll send our replies there.
-SLACK_URL = "https://hooks.slack.com/services/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"
+SLACK_URL = os.environ['WEBHOOK_URL']
+
+
 # We will specify a request URL in slack and slack with try to verify the url
 # the code below checks to see if slack is verifying the url with a challenge
 # if so it will echo the challenge
@@ -62,7 +63,7 @@ def lambda_handler(data, context):
 
 
 
-        r = requests.post('https://hooks.slack.com/services/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', data=json.dumps(payload), headers=headers)
+        r = requests.post(SLACK_URL, data=json.dumps(payload), headers=headers)
         print(r.text)
        # Fire off the request!
 
